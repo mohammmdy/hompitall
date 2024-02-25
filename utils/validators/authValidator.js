@@ -26,6 +26,7 @@ exports.signupValidator = [
       if (!gmailRegex.test(val)) {
         throw new Error("يجب أن يكون البريد الإلكتروني من نوع Gmail");
       }
+      return true
     })
     .custom((val) =>
       User.findOne({ email: val }).then((user) => {
