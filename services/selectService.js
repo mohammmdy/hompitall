@@ -35,7 +35,13 @@ exports.select = asyncHandler(async (req, res, next) => {
         filteredHospitals = hospitals.filter(hospital => query.cases.test(hospital.cases));
     }
     else {
-        filteredHospitals = hospitals
+
+        // filteredHospitals = hospitals
+        let specificCases = ['جلطات', 'نزيف', 'نسا وتوليد', 'غيبوبة', 'تسمم', 'أزمة قلبية', 'عيون', 'حروق', 'حوادث', 'ذبحة صدرية'];
+        filteredHospitals = hospitals.filter(hospital => {
+            // Check if all specific cases are included in hospital.cases
+            return specificCases.every(caseItem => hospital.cases.includes(caseItem));
+        });
     }
 
     //3. for loop in the hospitals from 2 and calculate distance/duration between them and user location and save location in its hospital and if hospital.currentbed >0 save it in list1 else save it in list 2
