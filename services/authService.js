@@ -9,7 +9,7 @@ const sendEmail = require("../utils/sendEmail");
 const generateToken = require("../utils/generateToken");
 
 const User = require("../models/userModel");
-const { response } = require("express");
+const { response } = require("express"); 
 
 // @desc    SignUp
 // @route   GET /api/v1/auth/signup
@@ -24,7 +24,7 @@ exports.signup = asyncHandlers(async (req, res, next) => {
     gender: req.body.gender,
     phone: req.body.phone,
     age: req.body.age,
-  });
+  }); 
   //2.send response to client side
   res.status(201).json({ data: user });
 });

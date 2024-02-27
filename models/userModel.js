@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { bool } = require("sharp");
+// const { bool } = require("sharp");
 
 const userSchema = new mongoose.Schema(
   {

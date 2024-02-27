@@ -2,6 +2,7 @@ const path = require("path"); //core module
 
 //therd party modules
 const express = require("express");
+const cors = require('cors');
 const dotenv = require("dotenv");
 const morgan = require("morgan"); //middelware
 
@@ -32,6 +33,7 @@ const app = express();
 
 //middelware usage
 app.use(express.json()); //parsing json
+app.use(cors());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -42,7 +44,7 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/auth", authRout);
 app.use("/api/v1/hospital", hospitalRoute);
-app.use("/api/v1/select", selectRoute);
+app.use("/api/v1/select", selectRoute);   
 
 app.all("*", (req, res, next) => {
   next(new ApiError(`can't find this route:${req.originalUrl}`, 400));
