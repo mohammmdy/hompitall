@@ -13,8 +13,8 @@ const {
 } = require("../services/backService");
 
 const router = express.Router();
-
-router.use(authService.protect);
-router.get('/', predictTimeCalculator, minimumPredictTime, select)
+ 
+// router.use(authService.protect);
+router.post('/', predictTimeCalculator, minimumPredictTime, select)
 
 module.exports = router;

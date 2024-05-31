@@ -6,16 +6,16 @@ const cors = require('cors');
 const dotenv = require("dotenv");
 const morgan = require("morgan"); //middelware
 
-dotenv.config({ path: "config.env" });
+dotenv.config({ path: "config.env" }); 
 const ApiError = require("./utils/apiError");
-const dbConnection = require("./config/database");
+const dbConnection = require("./config/database"); 
 //Routes
-const userRoute = require("./routes/userRoute");
+const userRoute = require("./routes/userRoute"); 
 const authRout = require("./routes/authRoute");
 const hospitalRoute = require('./routes/hospitalRoute')
 const selectRoute = require('./routes/selectRoute')
 
-const globalError = require("./middlewares/errorMiddleWare");
+const globalError = require("./middlewares/errorMiddleWare"); 
 
 // const { createMachineState } = require('./services/machineService')
 
@@ -29,10 +29,10 @@ const globalError = require("./middlewares/errorMiddleWare");
 dbConnection();
 
 //express app
-const app = express();
-
+const app = express();    
+   
 //middelware usage
-app.use(express.json()); //parsing json
+app.use(express.json()); //parsing json 
 app.use(cors());
 
 if (process.env.NODE_ENV === "development") {
@@ -58,12 +58,12 @@ const server = app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
 
-//handelling any error outside express
+//handelling any error outside express 
 process.on("unhandledRejection", (err) => {
   console.error(`UnhandeledRejection Errors: ${err.name} <|> ${err.message}`);
   server.close(() => {
     console.error("shutting down ....");
-    process.exit(1);
+    process.exit(1); 
   });
 });
 
