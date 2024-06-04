@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Hompital",
+    "slug": "pushnotifications",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/hospital-icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/hospital-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/hospital-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/hospital-icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f67db72d-7652-45fc-80c0-70a27f8c5fae"
+      }
+    },
+    "owner": "karim.kemoo",
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
