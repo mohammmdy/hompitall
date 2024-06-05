@@ -257,7 +257,7 @@ export default function ReqHospital({ navigation }) {
 
   // Define the interval for scheduled requests (adjust as needed)
   const pollingInterval = 1 * 60 * 1000; // 1 minutes in milliseconds
-  const stopPollingAfter = 5 * 60 * 1000; // 3 minutes in milliseconds
+  const stopPollingAfter = 15 * 60 * 1000; // 3 minutes in milliseconds
   // useEffect(() => {
   //   if (location.coords.latitude !== 30) {
   //     const interval = setInterval(async () => {
