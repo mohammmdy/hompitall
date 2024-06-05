@@ -232,7 +232,7 @@ export default function ReqHospital({ navigation }) {
       // You can replace 'logo.png' with the path to your custom icon file
       // Make sure to place your custom icon in the assets folder of your project
       // and update the path accordingly
-      data: { image: require("../assets/hompital-Logo.png") },
+      data: { image: require("../assets/logo.jpg") },
     };
 
     try {
