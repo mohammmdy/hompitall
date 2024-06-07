@@ -26,12 +26,17 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import RespHosp from "../components/RespHosp";
 import { Entypo } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import AuthContext from "../context/AuthContext";
 import ModalContext from "../context/ModalContext";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import isEqual from "lodash/isEqual";
-import { useFonts, MarkaziText_400Regular, MarkaziText_700Bold } from '@expo-google-fonts/markazi-text';
+import {
+  useFonts,
+  MarkaziText_400Regular,
+  MarkaziText_700Bold,
+} from "@expo-google-fonts/markazi-text";
 
 // import { Notifications } from 'expo';
 const reqHospImg = require("../assets/requestHospital.png");
@@ -43,7 +48,6 @@ const reqHospImg = require("../assets/requestHospital.png");
 //     shouldSetBadge: false,
 //   }),
 // });
-
 
 export default function ReqHospital({ navigation }) {
   let [fontsLoaded] = useFonts({
@@ -75,8 +79,8 @@ export default function ReqHospital({ navigation }) {
   // const { setHospitals } = useContext(AuthContext);
   const [refreshing, setRefreshing] = useState(false);
   const { token } = useContext(AuthContext);
-  // ********************************
-  // ********* notification code ***********************
+  // ************
+  // *** notification code *********
   // const sendNotification = async () => {
   //   console.log("send notification");
   //   const message = {
@@ -252,8 +256,8 @@ export default function ReqHospital({ navigation }) {
     }
   };
 
-  // ***************************************************
-  // ************ scheduled requests **************************
+  // *****************
+  // **** scheduled requests **********
 
   // Define the interval for scheduled requests (adjust as needed)
   const pollingInterval = 1 * 60 * 1000; // 1 minutes in milliseconds
@@ -361,8 +365,7 @@ export default function ReqHospital({ navigation }) {
     };
   }, [section, disease, location]);
 
-
-  // **********************************************************
+  // ********************
   // animation
   const startAnimation = () => {
     Animated.loop(
@@ -389,7 +392,7 @@ export default function ReqHospital({ navigation }) {
     startAnimation();
   }, [reqLocation]);
 
-  // ********************************
+  // ************
   useEffect(() => {
     if (notification) {
       sendNotification();
@@ -397,7 +400,7 @@ export default function ReqHospital({ navigation }) {
   }, [notification]);
 
   // sendNotification()
-  const url = "http://192.168.1.2:8000/api/v1/select";
+  const url = "http://192.168.1.6:8000/api/v1/select";
 
   const headers = {
     "Content-Type": "application/json",
@@ -507,6 +510,17 @@ export default function ReqHospital({ navigation }) {
       >
         <View style={styles.imageContainer}>
           <Image source={reqHospImg} style={styles.hospImg} />
+          {!token ? (
+            <Pressable
+              onPress={() => navigation.navigate("QuickTreat")}
+              style={styles.aidPress}
+            >
+              <View style={styles.aidview}>
+                <Text style={styles.aidtext}>الاسعافات الاولية</Text>
+                <Ionicons name={"medkit"} size={27} color={"white"} />
+              </View>
+            </Pressable>
+          ) : null}
         </View>
         <View style={styles.formContainer}>
           {/* choose disease */}
@@ -668,6 +682,7 @@ export default function ReqHospital({ navigation }) {
         </View>
 
         <RespHosp hospitals={hospitals} visible={visible} />
+        {/* first aid for guest */}
       </ScrollView>
     </SafeAreaView>
   );
@@ -706,7 +721,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "600",
     marginRight: 10,
-    fontFamily: 'MarkaziText_700Bold',
+    fontFamily: "MarkaziText_700Bold",
   },
   locationImg: {
     justifyContent: "center",
@@ -718,7 +733,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
     // fontWeight: "bold",
-    fontFamily: 'MarkaziText_700Bold',
+    fontFamily: "MarkaziText_700Bold",
     backgroundColor: "#900",
     color: "white",
     fontSize: 24,
@@ -733,4 +748,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginVertical: 30,
   },
+  aidview: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "auto",
+    backgroundColor: "#76b49f",
+    width: "60%",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10
+  },
+  aidPress: {
+    flexDirection: "row-reverse",
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 20,
+    marginVertical: 20
+  },
+  aidtext: {
+    color: "white",
+    fontFamily: "MarkaziText_700Bold",
+    fontSize: 20
+  }
 });
