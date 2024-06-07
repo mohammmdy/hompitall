@@ -118,6 +118,12 @@ function AuthStack() {
         component={Index}
         options={{ headerShown: false }}
       />
+              <Stack.Screen
+        name="QuickTreat"
+        component={QuickTreat}
+        options={{ headerShown: true }}
+      />
+        
       <Stack.Screen
         name="SigninScreen"
         component={SigninScreen}
