@@ -9,6 +9,7 @@ import {
   StyleSheet,
   StatusBar,
   Pressable,
+  Alert,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -52,7 +53,7 @@ function SigninScreen({ navigation }) {
     return Object.keys(errors).length === 0;
   };
 
-  const url = "http://192.168.1.2:8000/api/v1/auth/login";
+  const url = "http://192.168.1.3:8000/api/v1/auth/login";
   const headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + AsyncStorage.getItem("JWT"),
@@ -103,6 +104,17 @@ function SigninScreen({ navigation }) {
     }
   };
 
+  const enterAsGuest = () => {
+    Alert.alert('تنبيه', 'ستفقد بعض المميزات في المستقبل', [
+      {
+        text: 'الغاء',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      { text: 'تاكيد', onPress: () => navigation.navigate("ReqHospital") },
+    ]);
+  }
+
   return (
     <SafeAreaView style={styles.contanier}>
       {/* <Image source={bg} style={styles.Image} resizeMode="cover" /> */}
@@ -135,7 +147,7 @@ function SigninScreen({ navigation }) {
             </View>
             <TextInput
               style={styles.input}
-              placeholder="*****@gmail.com"
+              placeholder="***@gmail.com"
               placeholderTextColor={"#071355"}
               keyboardType="email-address"
               onChangeText={setEmail}
@@ -151,7 +163,7 @@ function SigninScreen({ navigation }) {
             </View>
             <TextInput
               style={styles.input}
-              placeholder="******"
+              placeholder="**"
               placeholderTextColor={"#071355"}
               keyboardType="default"
               secureTextEntry={true}
@@ -163,9 +175,7 @@ function SigninScreen({ navigation }) {
           </View>
           <View style={styles.quesContainer}>
             <Pressable
-              onPress={() => {
-                navigation.navigate("ReqHospital");
-              }}
+              onPress={enterAsGuest}
               onPressIn={() => setIsPressedGuest(true)}
               onPressOut={() => setIsPressedGuest(false)}
             >
@@ -175,7 +185,7 @@ function SigninScreen({ navigation }) {
                   { color: isPressedGuest ? "#9abf4d" : "blue" },
                 ]}
               >
-                  دخول كزائر
+                دخول كزائر
               </Text>
             </Pressable>
             <Pressable
